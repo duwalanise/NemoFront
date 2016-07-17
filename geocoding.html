@@ -16,7 +16,8 @@
     </style>
   </head>
   <body>
-    <div id="map"></div>
+    <div id="map" style="height: 400px; width: 400px;"></div>
+    <input type="text" id="address"/>
     <div id="capture"></div>
     <script>
     var map, geocoder, infowindow;
@@ -51,6 +52,8 @@
         geocoder.geocode({'location': latlng}, function(results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
             if (results[1]) {
+              document.getElementById('address').value = results[1].formatted_address;
+              console.log(results);
               console.log(results[1].formatted_address);
             } else {
               window.alert('No results found');
