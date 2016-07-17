@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Cam Snap</title>
+<style>
+	.container {
+		border : 2px solid red;
+	}
+</style>
+<script type="text/javascript" src="js/webcam.min.js"></script>
+<script language="JavaScript">
+
+function ShowCam(){
+Webcam.set({
+width: 320,
+height: 240,
+image_format: 'jpeg',
+jpeg_quality: 100
+});
+Webcam.attach('#my_camera');
+}
+
+function take_snapshot() {
+
+    Webcam.snap(function(data_uri) {
+    document.getElementById('my_photo').innerHTML = '<img id="base64image" src="'+data_uri+'"/>';
+    document.getElementById('photo_viewer').style.display = 'block';
+    document.getElementById('photo_uploadar').style.display = 'none';
+	});
+
+}
+
+function retake_snapshot() {
+	document.getElementById('photo_viewer').style.display = 'none';
+    document.getElementById('photo_uploadar').style.display = 'block';
+}
+
+function SaveSnap(){
+    document.getElementById("loading").innerHTML="Saving, please wait...";
+    var file =  document.getElementById("base64image").src;
+    var formdata = new FormData();
+    formdata.append("base64image", file);
+    var ajax = new XMLHttpRequest();
+    ajax.addEventListener("load", function(event) { uploadcomplete(event);}, false);
+    ajax.open("POST", "upload.php");
+    ajax.send(formdata);
+}
+function uploadcomplete(event){
+    document.getElementById("loading").innerHTML="";
+    var image_return=event.target.responseText;
+    var showup=document.getElementById("uploaded").src=image_return;
+}
+window.onload= ShowCam;
+</script>
+<style type="text/css">
+.container{display:inline-block;width:320px;}
+#Cam{background:rgb(255,255,215);}#Prev{background:rgb(255,255,155);}#Saved{background:rgb(255,255,55);}
+</style>
+</head>
+<body>
+<div class="container" id="photo_uploadar" tyle="display:block"><b>Capture a Photo</b>
+    <div id="my_camera"></div><form><input type="button" value="Take Photo" onClick="take_snapshot()"></form>
+</div>
+<div class="container" id="photo_viewer" style="display:none"><b>Capture a Photo</b>
+    <div id="my_photo"></div><form><input type="button" value="Retake Photo" onClick="retake_snapshot()"></form>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Registration Form</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <h1>New Light Child Registration Campaign<h1>
+            </div>
+        </nav>
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-xs-7">
+                    <div class="well"></div>
+                </div>
+                <div class="col-xs-5">
+                    <div class="well">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container" id="photo_uploadar" style="display:block">
+            <b>Capture a Photo</b>
+            <div id="my_camera"></div>
+            <form>
+                <input type="button" value="Take Photo" id='take_snap'>
+            </form>
+        </div>
+        <div class="container" id="photo_viewer" style="display:none">
+            <b>Capture a Photo</b>
+            <div id="my_photo">
+                <div class="photo_wrapper"></div>
+            </div>
+            <form>
+                <input type="button" value="Retake Photo" id='retake_snap'>
+            </form>
+        </div>
+       
+        <script
+              src="https://code.jquery.com/jquery-2.2.4.min.js"
+              integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+              crossorigin="anonymous"></script>
+        
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="js/webcam.min.js"></script>
+        <script type="text/javascript" src="js/form.js"></script>
+
+    </body>
+</html>
+
