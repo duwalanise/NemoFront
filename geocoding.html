@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="capture"></div>
+    <script>
+    var map, geocoder, infowindow;
+    var marker;
+
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: {lat: 28.3949, lng: 84.1240}
+      });
+
+      geocoder = new google.maps.Geocoder;
+      infowindow = new google.maps.InfoWindow;
+
+       marker = new google.maps.Marker({
+        map: map
+      });
+
+      map.addListener('click', function(e) {
+        placeMarkerAndPanTo(e.latLng);
+        geocodeLatLng(e.latLng);
+      });
+    }
+
+    function geocodeLatLng(latlng) {
+        var input = latlng.lat() +", " + latlng.lng();
+        console.log(latlng);
+        console.log(input);
+        var latlngStr = input.split(',', 2);
+        var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+              console.log(results[1].formatted_address);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+      }
+
+
+    function placeMarkerAndPanTo(latLng) {
+      marker.setPosition(latLng)
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZbgvi04dbPI1TW1q6EV5d82ukgDecQe0&region=NP&callback=initMap"
+    async defer></script>
+  </body>
+</html>
